@@ -29,11 +29,13 @@ use crate::error::Result;
 /// Dispatches CLI commands.
 fn execute(app: cli::Application) -> Result<()> {
     match app.cmd {
-        cli::Command::Enable { value } => enable(value),
-        cli::Command::Filter { value } => filter(value),
-        cli::Command::Multiple { value } => multiple(value),
-        cli::Command::Output { value } => output(value),
-        cli::Command::Show {} => show(),
+        None => show(),
+        Some(cmd) => match cmd {
+            cli::Command::Enable { value } => enable(value),
+            cli::Command::Filter { value } => filter(value),
+            cli::Command::Multiple { value } => multiple(value),
+            cli::Command::Output { value } => output(value),
+        },
     }
 }
 

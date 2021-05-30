@@ -6,7 +6,7 @@ use structopt::StructOpt;
 #[structopt(about = "Solana BPF trace control program")]
 pub struct Application {
     #[structopt(subcommand)]
-    pub cmd: Command,
+    pub cmd: Option<Command>,
 }
 
 #[derive(StructOpt)]
@@ -19,8 +19,6 @@ pub enum Command {
     Multiple { value: Option<bool> },
     #[structopt(about = "Sets output file name")]
     Output { value: Option<String> },
-    #[structopt(about = "Shows the active configuration")]
-    Show {},
 }
 
 /// Constructs an instance of the Application.
