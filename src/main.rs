@@ -39,36 +39,37 @@ fn execute(app: cli::Application) -> Result<()> {
     }
 }
 
+use crate::config::{ENABLE, FILTER, MULTIPLE, OUTPUT, SHOW};
 use crate::request::request;
 
 fn enable(value: Option<bool>) -> Result<()> {
     match value {
-        None => request("enable"),
-        Some(value) => request(&format!("enable={}", &value)),
+        None => request(ENABLE),
+        Some(value) => request(&format!("{}={}", ENABLE, &value)),
     }
 }
 
 fn filter(value: Option<String>) -> Result<()> {
     match value {
-        None => request("filter"),
-        Some(value) => request(&format!("filter={}", &value)),
+        None => request(FILTER),
+        Some(value) => request(&format!("{}={}", FILTER, &value)),
     }
 }
 
 fn multiple(value: Option<bool>) -> Result<()> {
     match value {
-        None => request("multiple"),
-        Some(value) => request(&format!("multiple={}", &value)),
+        None => request(MULTIPLE),
+        Some(value) => request(&format!("{}={}", MULTIPLE, &value)),
     }
 }
 
 fn output(value: Option<String>) -> Result<()> {
     match value {
-        None => request("output"),
-        Some(value) => request(&format!("output={}", &value)),
+        None => request(OUTPUT),
+        Some(value) => request(&format!("{}={}", OUTPUT, &value)),
     }
 }
 
 fn show() -> Result<()> {
-    request("show")
+    request(SHOW)
 }
