@@ -15,10 +15,14 @@ pub enum Command {
     Enable { value: Option<bool> },
     #[structopt(about = "Applies filtering by program")]
     Filter { value: Option<String> },
-    #[structopt(about = "Enables writing traces each in different file")]
-    Multiple { value: Option<bool> },
     #[structopt(about = "Sets output file name")]
     Output { value: Option<String> },
+    #[structopt(about = "Enables writing traces each in different file")]
+    MultipleFiles { value: Option<bool> },
+    #[structopt(about = "Limits number of writing threads")]
+    MaxThreads { value: Option<usize> },
+    #[structopt(about = "Filters out too small programs")]
+    MinProgram { value: Option<usize> },
 }
 
 /// Constructs an instance of the Application.
