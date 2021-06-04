@@ -1,7 +1,8 @@
 //! solana-bpf-trace-control main module.
 
-#![forbid(unsafe_code)]
 #![deny(warnings)]
+#![deny(unsafe_code)]
+#![deny(missing_docs)]
 
 mod cli;
 mod config;
@@ -34,6 +35,7 @@ fn execute(app: cli::Application) -> Result<()> {
             cli::Command::Enable { value } => enable(value),
             cli::Command::Filter { value } => filter(value),
             cli::Command::Output { value } => output(value),
+            cli::Command::Binary { value } => binary(value),
             cli::Command::MultipleFiles { value } => multiple_files(value),
             cli::Command::MaxThreads { value } => max_threads(value),
             cli::Command::MinProgram { value } => min_program(value),
@@ -41,7 +43,9 @@ fn execute(app: cli::Application) -> Result<()> {
     }
 }
 
-use crate::config::{ENABLE, FILTER, MAX_THREADS, MIN_PROGRAM, MULTIPLE_FILES, OUTPUT, SHOW};
+use crate::config::{
+    BINARY, ENABLE, FILTER, MAX_THREADS, MIN_PROGRAM, MULTIPLE_FILES, OUTPUT, SHOW,
+};
 use crate::request::request;
 
 fn enable(value: Option<bool>) -> Result<()> {
@@ -62,6 +66,13 @@ fn output(value: Option<String>) -> Result<()> {
     match value {
         None => request(OUTPUT),
         Some(value) => request(&format!("{}={}", OUTPUT, &value)),
+    }
+}
+
+fn binary(value: Option<bool>) -> Result<()> {
+    match value {
+        None => request(BINARY),
+        Some(value) => request(&format!("{}={}", BINARY, value)),
     }
 }
 
