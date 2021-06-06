@@ -38,13 +38,13 @@ fn execute(app: cli::Application) -> Result<()> {
             cli::Command::Binary { value } => binary(value),
             cli::Command::MultipleFiles { value } => multiple_files(value),
             cli::Command::MaxThreads { value } => max_threads(value),
-            cli::Command::MinProgram { value } => min_program(value),
+            cli::Command::MinLength { value } => min_length(value),
         },
     }
 }
 
 use crate::config::{
-    BINARY, ENABLE, FILTER, MAX_THREADS, MIN_PROGRAM, MULTIPLE_FILES, OUTPUT, SHOW,
+    BINARY, ENABLE, FILTER, MAX_THREADS, MIN_LENGTH, MULTIPLE_FILES, OUTPUT, SHOW,
 };
 use crate::request::request;
 
@@ -90,10 +90,10 @@ fn max_threads(value: Option<usize>) -> Result<()> {
     }
 }
 
-fn min_program(value: Option<usize>) -> Result<()> {
+fn min_length(value: Option<usize>) -> Result<()> {
     match value {
-        None => request(MIN_PROGRAM),
-        Some(value) => request(&format!("{}={}", MIN_PROGRAM, value)),
+        None => request(MIN_LENGTH),
+        Some(value) => request(&format!("{}={}", MIN_LENGTH, value)),
     }
 }
 

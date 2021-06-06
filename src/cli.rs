@@ -29,8 +29,8 @@ pub enum Command {
     #[structopt(about = "Limits number of working threads")]
     MaxThreads { value: Option<usize> },
 
-    #[structopt(about = "Filters out too small programs")]
-    MinProgram { value: Option<usize> },
+    #[structopt(about = "Filters out too short traces")]
+    MinLength { value: Option<usize> },
 }
 
 /// Constructs an instance of the Application.
